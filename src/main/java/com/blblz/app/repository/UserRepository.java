@@ -1,8 +1,10 @@
 package com.blblz.app.repository;
 
 import com.blblz.app.domain.User;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -34,5 +36,22 @@ public class UserRepository {
         //put方法成功返回null
         user.setId(id);
         return repository.put(id,user) == null;
+    }
+
+    /**
+     * 获取所有用户列表
+     * @return Collection<User>
+     */
+    public Collection<User> getAllUser(){
+        return repository.values();
+    }
+
+    /**
+     * 通过ID获取用户信息
+     * @param id 主键ID
+     * @return {@link User} 对象
+     */
+    public User getUserById(int id){
+        return repository.get(id);
     }
 }
